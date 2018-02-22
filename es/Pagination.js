@@ -77,26 +77,6 @@ var Pagination = function (_React$Component) {
       }
     }
   }, {
-    key: 'getJumpPrevPage',
-    value: function getJumpPrevPage() {
-      return Math.max(1, this.state.current - (this.props.showLessItems ? 3 : 5));
-    }
-  }, {
-    key: 'getJumpNextPage',
-    value: function getJumpNextPage() {
-      return Math.min(this.calculatePage(), this.state.current + (this.props.showLessItems ? 3 : 5));
-    }
-  }, {
-    key: 'getJumpPrevPage',
-    value: function getJumpPrevPage() {
-      return Math.max(1, this.state.current - (this.props.showLessItems ? 3 : 5));
-    }
-  }, {
-    key: 'getJumpNextPage',
-    value: function getJumpNextPage() {
-      return Math.min(this.calculatePage(), this.state.current + (this.props.showLessItems ? 3 : 5));
-    }
-  }, {
     key: 'render',
     value: function render() {
       // When hideOnSinglePage is true and there is only 1 page, hide the pager
@@ -227,32 +207,26 @@ var Pagination = function (_React$Component) {
       } else {
         var prevItemTitle = props.showLessItems ? locale.prev_3 : locale.prev_5;
         var nextItemTitle = props.showLessItems ? locale.next_3 : locale.next_5;
-        if (props.showPrevNextJumpers) {
-          jumpPrev = React.createElement(
-            'li',
-            {
-              title: props.showTitle ? prevItemTitle : null,
-              key: 'prev',
-              onClick: this.jumpPrev,
-              tabIndex: '0',
-              onKeyPress: this.runIfEnterJumpPrev,
-              className: prefixCls + '-jump-prev'
-            },
-            props.itemRender(this.getJumpPrevPage(), 'jump-prev', React.createElement('a', { className: prefixCls + '-item-link' }))
-          );
-          jumpNext = React.createElement(
-            'li',
-            {
-              title: props.showTitle ? nextItemTitle : null,
-              key: 'next',
-              tabIndex: '0',
-              onClick: this.jumpNext,
-              onKeyPress: this.runIfEnterJumpNext,
-              className: prefixCls + '-jump-next'
-            },
-            props.itemRender(this.getJumpNextPage(), 'jump-next', React.createElement('a', { className: prefixCls + '-item-link' }))
-          );
-        }
+        jumpPrev = React.createElement(
+          'li',
+          {
+            title: props.showTitle ? prevItemTitle : null,
+            key: 'prev',
+            tabIndex: '0',
+            className: prefixCls + '-jump-prev'
+          },
+          '...'
+        );
+        jumpNext = React.createElement(
+          'li',
+          {
+            title: props.showTitle ? nextItemTitle : null,
+            key: 'next',
+            tabIndex: '0',
+            className: prefixCls + '-jump-next'
+          },
+          '...'
+        );
         lastPager = React.createElement(Pager, {
           locale: props.locale,
           last: true,
@@ -533,14 +507,6 @@ var _initialiseProps = function _initialiseProps() {
     }
   };
 
-  this.jumpPrev = function () {
-    _this2.handleChange(_this2.getJumpPrevPage());
-  };
-
-  this.jumpNext = function () {
-    _this2.handleChange(_this2.getJumpNextPage());
-  };
-
   this.hasPrev = function () {
     return _this2.state.current > 1;
   };
@@ -565,14 +531,6 @@ var _initialiseProps = function _initialiseProps() {
 
   this.runIfEnterNext = function (e) {
     _this2.runIfEnter(e, _this2.next);
-  };
-
-  this.runIfEnterJumpPrev = function (e) {
-    _this2.runIfEnter(e, _this2.jumpPrev);
-  };
-
-  this.runIfEnterJumpNext = function (e) {
-    _this2.runIfEnter(e, _this2.jumpNext);
   };
 
   this.handleGoTO = function (e) {
